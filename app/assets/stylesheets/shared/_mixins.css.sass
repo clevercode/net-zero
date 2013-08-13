@@ -1,0 +1,23 @@
+=smooth-fonts()
+  -webkit-font-smoothing: antialiased
+  -moz-font-smoothing: antialiased
+  -o-font-smoothing: antialiased
+  font-smoothing: antialiased
+
+// Learning Mixins - Definition then Call
+// =box-shadow($color, $x, $y, $blur, $spread: 0px)
+// +box-shadow(white, 2px, 2px, 10px)
+// =box-shadow($shadow)
+// +box-shadow(white 2px 2px 10px 0px)
+
+=box-shadow($shadow)
+  -webkit-box-shadow: $shadow
+  -moz-box-shadow: $shadow
+  box-shadow: $shadow
+
+=border-radius($radius)
+  -webkit-border-radius: $radius
+  -moz-border-radius: $radius
+  -ms-border-radius: $radius
+  -o-border-radius: $radius
+  border-radius: $radius
