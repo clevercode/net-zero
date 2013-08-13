@@ -1,11 +1,31 @@
-.button.login.btn.btn-large.btn-primary.btn-block Login
+.scheduleWrapper
+  %a.leftArrow.dayNav &lt;
 
-#messagesDiv
+  .dayWrapper 
+    Monday 12
+    .shiftsWrapper
+      .shiftWrapper
+        %a.circle(href="#")
+        %a.circle(href="#")
+        %a.circle(href="#")
+        %a.circle(href="#")
 
-%form
-  .input-group
-    %span.input-group-addon @
-    %input#nameInput.form-control{:placeholder => "Name", :type => "text"}
-  .input-group
-    %span.input-group-addon P
-    %input#messageInput.form-control{:placeholder => "Message", :type => "text"}
+      .shiftWrapper
+        %a.circle(href="#")
+        %a.circle(href="#")
+        %a.circle(href="#")
+        %a.circle(href="#")
+
+      .shiftWrapper
+        %a.circle(href="#")
+        %a.circle(href="#")
+        %a.circle(href="#")
+        %a.circle(href="#")
+
+      .shiftWrapper
+        %a.circle(href="#")
+        %a.circle(href="#")
+        %a.circle(href="#")
+        %a.circle(href="#")
+
+  %a.rightArrow.dayNav &gt;
