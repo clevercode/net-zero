@@ -5,5 +5,6 @@
 //= require bootstrap
 //= require turbolinks
 //= require bookies
+//= require routes
 //= require_tree .
 

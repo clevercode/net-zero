@@ -1,62 +1,66 @@
 .scheduleWrapper
   margin: 0 auto
-  width: 402px
+  width: 600px
+  height: 150px
   display: block
+  border-radius: 4px
 
-a.dayNav
-  color: white
-  font:
-    weight: 100
-    size: 12em
-  float: left
-  display: block
-  text-decoration: none
-
-a.dayNav:hover
-  color: $darkBlueGrey
-
-.dayWrapper
-  text-align: center
-  font:
-    size: 2em
-    weight: 900
-  overflow: hidden
-  float: left
-
-.shiftsWrapper
-  background:
-    color: #fff
-  width: 200px
-  height: 200px
-  margin-bottom: 0
-  // line-height: 0.7em
-  border-radius: 10px
-  overflow: hidden
-
-  .shiftWrapper
-    background:
-      color: $darkBlueGrey
+  .dayWrapper
     width: 100%
-    height: 25%
-    margin: 0
-    padding: 0 5%
+    height: 100%
+    text-align: center
+    font:
+      size: 2em
+      weight: 900
+    position: relative
 
-    a.circle
-      background:
-        color: #fff
-      width: 15%
-      height: 54%
-      margin: 6% 5%
-      border-radius: 30px
-      float: left
+    a.dayNav
+      font:
+        weight: 100
+        size: 4em
       display: block
+      text-decoration: none
+      line-height: 150px
+      position: absolute
+      top: 0
+      bottom: 0
+      right: 0
 
-    a.circle:hover
-      background:
-        color: $orange
+      &.rightArrow
+        right: auto
+        left: 0
 
+      &:hover
+        color: $darkBlueGrey
 
+.shiftWrapper
+  height: 100px
+  width: 400px
+  margin: 0 auto
+  background:
+    color: $darkBlueGrey
+  border-radius: 30px
+  padding: 4px
 
+  a.circle
+    box-sizing: border-box
+    border: 2px solid #2d2d2d
+    width: 90px
+    height: 90px
+    margin: 0
+    border-radius: 90px
+    float: left
+    margin-right: 4px
+    margin-left: 4px
 
+  a.circle:hover
+    background:
+      color: $blue
 
+  a.circle.active
+    background:
+      color: $blue
 
+  a.circle.waitlisted
+    border:
+      color: $blue

@@ -1,4 +1,7 @@
 class PagesController < ApplicationController
-  def home
+  def dayView
+  end
+
+  def chat
   end
 end

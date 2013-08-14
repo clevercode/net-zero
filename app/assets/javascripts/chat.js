@@ -9,7 +9,6 @@ bookies.controller('chatController', ['$scope', 'angularFireCollection', functio
   var userName = "";
   var myDataRef = new Firebase('https://harbuckle.firebaseio.com/chat');
 
-
   $scope.addMsg = function(){
     $scope.messages.add({name : user.displayName , text: $scope.MsgInput});
   };
