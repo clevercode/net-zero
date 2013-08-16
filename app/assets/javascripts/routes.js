@@ -1,16 +1,11 @@
-bookies.config(function($routeProvider){
-  console.log('routes.js running: ' , $routeProvider);
+NetZero.config(function($routeProvider){
   $routeProvider
     .when("",{
-     templateUrl: '/dayView.html',
+     templateUrl: '/index.html',
     })
-    .when("/chat",{
-      templateUrl: '/chat.html',
-      controller: "chatController"
+    .when("/velocity",{
+      templateUrl: '/velocity.html',
+      controller: "velocityController"
     })
-    .when("/schedule",{
-      templateUrl: '#',
-      controller: "scheduleController"
-    });
 
 });

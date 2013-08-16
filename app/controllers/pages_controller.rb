@@ -1,7 +1,8 @@
 class PagesController < ApplicationController
-  def dayView
+  def index
+  end  
+  def velocity
   end
-
-  def chat
+  def netZero
   end
 end

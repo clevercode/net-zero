@@ -9,4 +9,4 @@
 
 # Make sure your secret_key_base is kept private
 # if you're sharing your code publicly.
-LiveChat::Application.config.secret_key_base = 'd91d893dd5a3dd4fe1d5befacac1106f48fe43146f08bc04a199dec2f647b3f6e2c3df827136b292b527050c02f6206d15157016802ca0df4059e4bc29438230'
+NetZero::Application.config.secret_key_base = 'd91d893dd5a3dd4fe1d5befacac1106f48fe43146f08bc04a199dec2f647b3f6e2c3df827136b292b527050c02f6206d15157016802ca0df4059e4bc29438230'

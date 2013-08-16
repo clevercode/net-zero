@@ -4,7 +4,7 @@
 //= require jquery
 //= require bootstrap
 //= require turbolinks
-//= require bookies
+//= require netZero
 //= require routes
 //= require_tree .
 

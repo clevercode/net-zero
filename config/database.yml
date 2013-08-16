@@ -1,7 +1,7 @@
 development:
   adapter: postgresql
   encoding: utf8
-  database: livechat_development
+  database: NetZero_development
   pool: 5
   username: alyssa
   password: ""
@@ -10,7 +10,7 @@ development:
 test:
   adapter: postgresql
   encoding: utf8
-  database: livechat_test
+  database: NetZero_test
   pool: 5
   username: alyssa
   password: ""

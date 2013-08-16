@@ -1,8 +1,0 @@
-%form.wrapper{"ng-submit" => "addMsg()", "ng-controller" => "chatController"}
-  .messagesDiv
-    %ul
-      %li.list-group-item{"ng-repeat" => "msg in messages"} {{msg.name}} - {{msg.text}}
-
-  .controlWrapper
-    %input#nameInput{:placeholder => "{{userName}}", :type => "text"}
-    %input#messageInput{:placeholder => "Message", :type => "text"}
