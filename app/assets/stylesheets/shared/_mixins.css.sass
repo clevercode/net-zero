@@ -22,7 +22,12 @@
   -o-border-radius: $radius
   border-radius: $radius
 
-=ellipsize
+=ellipsize()
   overflow: hidden
   text-overflow: ellipsis
   white-space: no-wrap
+
+=box-sizing($method)
+  -webkit-box-sizing: $method
+  -moz-box-sizing: $method
+  box-sizing: $method
