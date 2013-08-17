@@ -1,9 +1,10 @@
 %header
+  %h1= link_to 'Net Zero', root_path
   %ul.nav.nav-pills{"ng-controller" => "loginController"}
-    %li.btn.btn-primary
+    %li.button
       %a(href= "#/velocity") Velocity
-    %li.btn.btn-primary.active
+    %li.button.active
       %a(href= "#/index") Goals
-    %li.btn.btn-primary
+    %li.button
       %a{"ng-click" => "log_user()"} {{loginButtonDisplay}}
 
