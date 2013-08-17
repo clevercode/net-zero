@@ -1,6 +1,6 @@
-.goalsWrapper{"ng-controller" => "Index"}
-  %div(ng-repeat="goal in goals")
-    %a(class="goal {{goals.name}}") {{goal.name}} {goal}
+.goals{"ng-controller" => "Index"}
+  %div.goal(ng-repeat="goal in goals")
+    %a.title(class="{{goal.name}}") {{goal.name}}
 
 
 
