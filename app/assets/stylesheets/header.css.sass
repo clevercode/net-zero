@@ -1,11 +1,41 @@
 header
-  margin: 0 auto
-  display: block
-  width: 80%
+  padding: 1.5em
 
-.btn
-  width: 30%
-  padding: 0
-  
-  a
-    +ellipsize()
+  h1
+    text-align: center
+
+    a
+      color: $dark-gray
+      font-size: 2.4em
+      font-weight: 900
+
+  ul
+    margin-top: 1.5em
+    list-style: none
+    overflow: hidden
+
+  li
+    float: left
+    width: 30%
+    margin-right: 5%
+
+    &:last-child
+      margin-right: 0
+
+    &.active a
+      background: $dark-gray
+
+    a
+      width: 100%
+      display: block
+      background: $highlight
+      color: #fff
+      font-size: 1.6em
+      line-height: 2.5em
+      text-align: center
+
+      &:hover, &:focus
+        background: tint($highlight, 25%)
+
+      &:active
+        background: $dark-gray
