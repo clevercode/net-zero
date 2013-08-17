@@ -5,8 +5,8 @@ NetZero.controller('Index', ['$scope', 'angularFireCollection', function($scope,
     console.log('dataRef Snapshot.val() : ', snapshot.val());
     $scope.goals = snapshot.val();
     $scope.$apply();
+
+    window.goals.initialize()
   });
-
-
 
 }]);

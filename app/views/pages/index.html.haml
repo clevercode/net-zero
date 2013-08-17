@@ -1,5 +1,5 @@
 .goals{"ng-controller" => "Index"}
-  %div.goal(class="{{goal.name}}" ng-repeat="goal in goals")
+  .goal(class="{{goal.name}}" ng-repeat="goal in goals")
     .budget ${{goal.budget}}
     .title {{goal.name}}
     .progress
