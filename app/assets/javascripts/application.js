@@ -2,7 +2,6 @@
 //= require angularfire.min
 
 //= require jquery
-//= require bootstrap
 //= require turbolinks
 //= require netZero
 //= require routes
