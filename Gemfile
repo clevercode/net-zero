@@ -4,6 +4,7 @@ source 'https://rubygems.org'
 gem 'rails', '4.0.0.rc2'
 
 gem 'sass-rails'
+gem 'compass-rails', '~> 2.0.alpha.0'
 gem 'uglifier',      '>= 1.0.3'
 
 
