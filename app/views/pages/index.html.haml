@@ -1,8 +1,13 @@
-.goals{"ng-controller" => "Index"}
-  .goal(class="{{goal.name}}" ng-repeat="goal in goals")
-    .budget ${{goal.budget}}
-    .title {{goal.name}}
-    .progress
+%section{ 'ng-controller' => 'Index' }
+  .goals-container
+    .goals
+      %a.goal(class="{{goal.name}}" href="" ng-repeat="goal in goals")
+        .budget ${{goal.budget}}
+        .title {{goal.name}}
+        .progress
 
-
-
+  %table.goal-transactions(class="goal-{{goal.name}}" ng-repeat="goal in goals")
+    %tr.transaction(class="{{transaction.name}}" ng-repeat="transaction in goal.tickets")
+      %td.date {{transaction.date}}
+      %td.user {{transaction.user_id}}
+      %td.amount ${{transaction.amount}}

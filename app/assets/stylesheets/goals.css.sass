@@ -1,20 +1,26 @@
 .goals-container
   position: relative
+  width: 100%
   height: 200px
+  +box-shadow(black 0 0 1.5em 0 inset)
+  +overflow-scrolling()
   background-color: $dark-gray
   border:
     bottom: 1px solid $dark-gray
     top: 1px solid $dark-gray
-  overflow: auto
+  overflow-x: auto
 
 .goals
+  position: relative
   width: 400%
   height: 100%
+  padding: 0 1.5em
+  overflow: hidden
 
   .goal
     position: relative
     float: left
-    width: 25%
+    width: 290px
     height: 100%
     display: block
 
@@ -52,3 +58,43 @@
 
     .title
       bottom: 0.5em
+
+.goal-transactions
+  width: 100%
+
+  td
+    width: 33.3%
+    padding: 1em
+    +ellipsize()
+    border-bottom: 1px solid $dark-gray
+    font-size: 1.5em
+
+    &.user
+      text-align: center
+
+    &.amount
+      text-align: right
+
+@media all and (min-width: 480px)
+  .goals .goal
+    width: 450px
+
+@media all and (min-width: 568px)
+  .goals .goal
+    width: 538px
+
+@media all and (min-width: 768px)
+  .goals .goal
+    width: 738px
+
+@media all and (min-width: 1024px)
+  .goals .goal
+    width: 994px
+
+@media all and (min-width: 1536px)
+  .goals .goal
+    width: 1506px
+
+@media all and (min-width: 2048px)
+  .goals .goal
+    width: 2018px
