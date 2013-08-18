@@ -7,5 +7,4 @@ NetZero.config(function($routeProvider){
       templateUrl: '/velocity.html',
       controller: "velocityController"
     })
-
 });
