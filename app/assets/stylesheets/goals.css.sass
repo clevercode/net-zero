@@ -59,6 +59,22 @@
     .title
       bottom: 0.5em
 
+.goal-transactions
+  width: 100%
+
+  td
+    width: 33.3%
+    padding: 1em
+    +ellipsize()
+    border-bottom: 1px solid $dark-gray
+    font-size: 1.5em
+
+    &.user
+      text-align: center
+
+    &.amount
+      text-align: right
+
 @media all and (min-width: 480px)
   .goals .goal
     width: 450px
