@@ -9,11 +9,12 @@
     %meta{ name: 'apple-mobile-web-app-capable', content: 'yes' }
     %meta{ name: 'apple-mobile-web-app-status-bar-style', content: 'black' }
 
-    = ios_startup_image_tag 'iPad/Default-Portrait.png', :ipad, :portrait
-    = ios_startup_image_tag 'iPad/Default-Landscape.png', :ipad, :landscape
-    = ios_startup_image_tag 'iPad/Default-Portrait@2x.png', :ipad_retina, :portrait
-    = ios_startup_image_tag 'iPad/Default-Landscape@2x.png', :ipad_retina, :landscape
-    = ios_startup_image_tag 'iPhone/Default-Portrait@2x.png', :iphone_retina, :portrait
+    %link{ rel: 'apple-touch-startup-image', media: '(device-height: 640px)', href: 'iPhone/Default-Portrait_960.png' }
+    %link{ rel: 'apple-touch-startup-image', media: '(device-width: 320px) and (-webkit-device-pixel-ratio: 2)', href: 'iPhone/Default-Portrait_960.png' }
+    %link{ rel: 'apple-touch-startup-image', media: '(device-width: 768px) and (orientation: portrait)', href: 'iPad/Default-Portrait.png' }
+    %link{ rel: 'apple-touch-startup-image', media: '(device-width: 768px) and (orientation: landscape)', href: 'iPad/Default-Landscape.png' }
+    %link{ rel: 'apple-touch-startup-image', media: '(device-width: 768px) and (orientation: portrait) and (-webkit-device-pixel-ratio: 2)', href: 'iPad/Default-Portrait@2x.png' }
+    %link{ rel: 'apple-touch-startup-image', media: '(device-width: 768px) and (orientation: landscape) and (-webkit-device-pixel-ratio: 2)', href: 'iPad/Default-Landscape@2x.png' }
 
     = ios_touch_icon_tag 'iPad/apple-icon_72.png', '72x72'
     = ios_touch_icon_tag 'iPad/apple-icon_144.png', '144x144'
