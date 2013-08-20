@@ -4,10 +4,10 @@
   height: 200px
   +box-shadow(black 0 0 1.5em 0 inset)
   +overflow-scrolling()
-  background-color: $dark-gray
+  background-color: #555
   border:
-    bottom: 1px solid $dark-gray
-    top: 1px solid $dark-gray
+    bottom: 1px solid #555
+    top: 1px solid #555
   overflow-x: auto
 
 .goals
@@ -48,6 +48,10 @@
       text-align: center
       text-shadow: 0 1px 0 rgba(255,255,255,0.35)
       text-transform: capitalize
+
+      &.light
+        color: white
+        text-shadow: 0 1px 0 rgba(0,0,0,0.35)
 
     .budget
       top: 0.5em

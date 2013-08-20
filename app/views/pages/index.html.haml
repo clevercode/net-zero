@@ -1,7 +1,7 @@
 %section{ 'ng-controller' => 'Index' }
   .goals-container
     .goals
-      %a.goal(data-name="{{goal.name}}" href="" ng-repeat="goal in goals")
+      %a.goal(data-name="{{goal.name}}" data-remaining="{{ remainingBudget(goal.budget, goal.tickets, true) }}" href="" ng-repeat="goal in goals")
         .budget ${{ remainingBudget(goal.budget, goal.tickets) }}
         .title {{goal.name}}
         .progress

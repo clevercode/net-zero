@@ -3,12 +3,17 @@ NetZero.controller('Index', ['$scope', 'angularFireCollection', function($scope,
   $scope.users = angularFireCollection('https://netzero.firebaseio.com/users');
   $scope.ticket = { date: Date.create().format('{Mon} {ord}') };
 
-  $scope.remainingBudget = function(budget, tickets) {
+  $scope.remainingBudget = function(budget, tickets, percentage) {
+    var originalBudget = budget;
     if (!!budget && !!tickets) {
       budget = parseFloat(budget);
       for (var id in tickets) {
         budget -= parseFloat(tickets[id].amount);
       }
+    }
+
+    if (!!percentage) {
+      budget = (budget / originalBudget) * 100
     }
 
     return budget;
