@@ -1,21 +1,25 @@
 NetZero.controller('Index', ['$scope', 'angularFireCollection', function($scope, angularFireCollection){
-  var dataRef = new Firebase('https://netzero.firebaseio.com/goals');
+  $scope.goals = angularFireCollection('https://netzero.firebaseio.com/goals');
+  $scope.users = angularFireCollection('https://netzero.firebaseio.com/users');
+  console.log('goals:', $scope.goals);
+  console.log('users:', $scope.users);
 
-  dataRef.on('value', function(snapshot) {
-    console.log('dataRef Snapshot.val() : ', snapshot.val());
-    $scope.goals = _.map(snapshot.val(), function(goal) {
-      goal.tickets = _.sortBy(goal.tickets, 'date').reverse();
-      goal.tickets = _.map(goal.tickets, function(ticket) {
-        ticket.date = Date.create(ticket.date).format('{Mon} {dd}');
-        return ticket;
-      });
-
-      return goal;
+  $scope.userNameFromId = function(id) {
+    if (!!$scope.users && $scope.users.length) {
+      var user = _.find($scope.users, function(user) { return user.id == id; });
+      return user.name;
+    } else {
+      return id;
+    }
+  }
+  // ticketForm.date.value = Date.create().format('{Mon} {dd}{ord}');
+  $scope.saveTicket  = function(ticket) {
+    var goalRef = this.goal.$ref;
+    goalRef.child('tickets').push({
+      amount: ticket.amount,
+      date: Date.parse(Date.create(ticket.date)),
+      user_id: ticket.user
     });
-
-    $scope.$apply();
-
-    window.goals.initialize()
-  });
+  };
 
 }]);
