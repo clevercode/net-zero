@@ -1,4 +1,4 @@
-NetZero.config(function($routeProvider){
+NetZero.config(['$routeProvider', function($routeProvider){
   $routeProvider
     .when("",{
      templateUrl: '/index.html',
@@ -7,4 +7,4 @@ NetZero.config(function($routeProvider){
       templateUrl: '/velocity.html',
       controller: "velocityController"
     })
-});
+}]);
