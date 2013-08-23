@@ -1,20 +1,18 @@
 %section{ 'ng-controller' => 'Index' }
   .goals-container
     .goals
-      %a.goal(class="{{goal.name}}" href="" ng-repeat="goal in goals")
-        .budget ${{goal.budget}}
+      %a.goal(data-name="{{goal.name}}" data-remaining="{{ remainingBudget(goal.budget, goal.tickets, true) }}" href="" ng-repeat="goal in goals")
+        .budget ${{ remainingBudget(goal.budget, goal.tickets) }}
         .title {{goal.name}}
         .progress
 
-  %table.goal-transactions(class="goal-{{goal.name}}" ng-repeat="goal in goals")
-    %tr.new-transaction
+  %table.goal-tickets(class="goal-{{goal.name}}" ng-repeat="goal in goals")
+    %tr.new-ticket
       %td{ colspan: '3' }
-        %form{ name: 'ticketForm', 'ng-submit' => 'saveTicket(ticket)'}
-          %select{ name: 'user', required: true, 'ng-model' => 'ticket.user' }
-            %option{ value: '{{user.$id}}', 'ng-repeat' => 'user in users' } {{user.name}}
-
-          %input{ type: 'text', name: 'date', placeholder: 'Aug 8th', required: true, 'ng-model' => 'ticket.date' }
-          %input{ type: 'text', name: 'amount', placeholder: '24', required: true, 'ng-model' => 'ticket.amount' }
+        %form{ name: 'ticketForm', 'ng-submit' => 'saveTicket(ticket)' }
+          %select{ name: 'user', 'ng-model' => 'ticket.user', 'ng-options' => 'user.name for user in users' }
+          %input{ type: 'text', name: 'date', 'ng-model' => 'ticket.date' }
+          %input{ type: 'number', name: 'amount', placeholder: '10.00', 'ng-model' => 'ticket.amount' }
           %input{ type: 'submit', 'ng-disabled' => 'messageForm.$invalid' }
 
     %tr.transaction(class="{{transaction.name}}" ng-repeat="transaction in goal.tickets")

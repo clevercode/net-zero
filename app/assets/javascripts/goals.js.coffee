@@ -3,6 +3,8 @@ window.goals =
     @view = $ '.goals-container'
     @view.disableSelection()
     @attachEventListeners()
+    @view.find('.goal:eq(0)').click()
+    @setGoalProgress()
 
   on: (event, selector, handler) ->
     @view.on event, selector, $.proxy this, handler
@@ -10,9 +12,10 @@ window.goals =
   off: (event) -> @view.off event
 
   attachEventListeners: ->
+    @off '*'
     @on 'scroll', '', '_onScroll'
     @on 'click', '.goal', '_onGoalClick'
-    $(window).on 'orientationchange', $.proxy this, '_onOrientationChange'
+    $(window).off('*').on 'orientationchange', $.proxy this, '_onOrientationChange'
 
   centerGoal: ->
     @_centerTimeout = setTimeout =>
@@ -29,6 +32,17 @@ window.goals =
   centerByPosition: (width, multiplier) ->
     leftPosition = multiplier * width
     @view.animate { scrollLeft: leftPosition }, 200, 'linear'
+    $goal = @view.find ".goal:eq(#{multiplier})"
+    $("table.goal-#{$goal.data('name')}").show().siblings('table').hide()
+
+  setGoalProgress: ->
+    for goal in @view.find '.goal'
+      $goal = $ goal
+      top = 100 - parseFloat $goal.data 'remaining'
+      $goal.children('.budget').addClass('light') if top > 10
+      $goal.children('.title').addClass('light') if top > 90
+      $goal.addClass('warning') if top > 75
+      $goal.children('.progress').css top: "#{top}%"
 
   # Event Handlers
   # 
