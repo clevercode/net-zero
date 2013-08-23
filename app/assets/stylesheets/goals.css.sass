@@ -4,10 +4,10 @@
   height: 200px
   +box-shadow(black 0 0 1.5em 0 inset)
   +overflow-scrolling()
-  background-color: #555
+  background-color: $dark-gray
   border:
-    bottom: 1px solid #555
-    top: 1px solid #555
+    bottom: 1px solid $dark-gray
+    top: 1px solid $dark-gray
   overflow-x: auto
 
 .goals
@@ -42,7 +42,7 @@
       right: 0
       z-index: 10
       position: absolute
-      color: #555
+      color: $dark-gray
       font-size: 2.5em
       font-weight: bold
       text-align: center
@@ -75,11 +75,6 @@
 
     &.amount
       text-align: right
-
-form
-  input, select
-    font-size: 2em
-    padding: 0.7em 1em
 
 @media all and (min-width: 480px)
   .goals .goal

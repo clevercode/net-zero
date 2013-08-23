@@ -5,7 +5,7 @@ header
     text-align: center
 
     a
-      color: $dark-gray
+      color: #222
       font-size: 2.4em
       font-weight: 900
 
@@ -23,13 +23,13 @@ header
       margin-right: 0
 
     &.active a
-      background: #111
+      background: #222
       font-weight: 900
 
     a
       width: 100%
       display: block
-      background: $highlight
+      background: #555
       color: #fff
       font-size: 1.6em
       font-weight: 100
@@ -37,7 +37,7 @@ header
       text-align: center
 
       &:hover, &:focus
-        background: tint($highlight, 25%)
+        background: darken($dark-gray, 10%)
 
       &:active
-        background: #111
+        background: #222
