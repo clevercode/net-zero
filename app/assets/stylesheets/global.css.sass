@@ -11,6 +11,14 @@ body
   color: #555
   line-height: 1.5em
 
-table
-  border-collapse: collapse
-  border-spacing: 0
+#overlay
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  z-index: 25
+  position: fixed
+  display: none
+  +single-transition(opacity, 300ms, ease)
+  background: rgba(0,0,0,0.75)
+  opacity: 0
