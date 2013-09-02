@@ -8,9 +8,13 @@ form
   margin: 1.5em
   padding: 1.5em
   +box-shadow(black 0 0 1.5em)
-  +transition-duration(300ms, 200ms)
-  +transition-property(top, opacity)
-  +transition-timing-function(cubic-bezier(0, 1, 0.25, 1.03), ease-in)
+
+  // top take 300ms to change from ^ 100% to 0 (.visible) and vice versa
+  // top using transition-timing-funciton cubic-bezier to animate
+  // opactiy take 200ms to change from 0 to 1 (.visible)
+  // opactiy using transition-timing-funciton ease-in to animate
+  +transition(top 300ms cubic-bezier(0, 1, 0.25, 1.03), opacity 200ms ease-in)
+
   background: white
   opacity: 0
 
@@ -38,7 +42,7 @@ form
     text-indent: -100%
 
     &:active
-      background-position: 0 -21px
+      background-position: 0 -22px
 
   input, select
     width: 100%

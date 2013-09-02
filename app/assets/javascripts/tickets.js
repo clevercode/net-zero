@@ -36,7 +36,11 @@ window.tickets = {
 
   _openForm: function($form) {
     $('body').scrollTop(0);
-    $form.show().addClass('visible');
+    $form.show();
+    setTimeout(function() {
+      $form.addClass('visible');
+    }, 0);
+
     this.overlay.show().css({ opacity: 1 });
   },
 
