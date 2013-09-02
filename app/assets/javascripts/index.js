@@ -1,6 +1,9 @@
 NetZero.controller('Index', ['$scope', 'angularFireCollection', function($scope, angularFireCollection) {
+  var timestamp = Date.parse(Date.create('beginning of week'));
   $scope.goals  = angularFireCollection('https://netzero.firebaseio.com/goals');
   $scope.users  = angularFireCollection('https://netzero.firebaseio.com/users');
+  $scope.week   = new Firebase('https://netzero.firebaseio.com/weeks/' + timestamp);
+
   $scope.ticket = { date: Date.create().format('{Mon} {ord}') };
   window.goals.initialize();
   window.tickets.initialize();
@@ -33,6 +36,12 @@ NetZero.controller('Index', ['$scope', 'angularFireCollection', function($scope,
     window.goals.update();
   });
 
+  // Runs on initial data load, and value change.
+  var noWeekExists = false;
+  $scope.week.on('value', function(snapshot) {
+    noWeekExists = snapshot.val() === null;
+  });
+
   // Runs everytime the $scope.users variable is updated.
   // Sets the user property of the ticket to the first user.
   var gotUser = false;
@@ -44,14 +53,16 @@ NetZero.controller('Index', ['$scope', 'angularFireCollection', function($scope,
   });
 
   // Saves the form data for the new ticket to the server.
-  $scope.saveTicket  = function(ticket) {
-    var goalRef = this.goal.$ref;
-    goalRef.child('tickets').push({
+  $scope.saveTicket = function(ticket) {
+    var newTicket = {
       amount:  parseFloat(ticket.amount),
       date:    Date.parse(Date.create(ticket.date)),
       note:    ticket.note,
+      goal_id: this.goal.$id,
       user_id: ticket.user.$id
-    });
+    };
+
+    addticketToWeek(newTicket);
 
     // Clears the form data.
     $scope.ticket = {
@@ -64,5 +75,15 @@ NetZero.controller('Index', ['$scope', 'angularFireCollection', function($scope,
     // Updates our goals on screen.
     window.goals.update(true);
   };
+
+  var addticketToWeek = function(ticket) {
+    if (noWeekExists) {
+      var week = {};
+      week[timestamp] = { 0: ticket };
+      $scope.week.parent().set(week);
+    } else {
+      $scope.week.push(ticket);
+    }
+  }
 
 }]);
