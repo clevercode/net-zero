@@ -1,8 +1,8 @@
 %section{ 'ng-controller' => 'Index' }
   .goals-container
     .goals
-      %a.goal(data-name="{{goal.name}}" data-remaining="{{ remainingBudget(goal.budget, goal.tickets, true) }}" href="" ng-repeat="goal in goals")
-        .budget ${{ remainingBudget(goal.budget, goal.tickets) }}
+      %a.goal(data-name="{{goal.name}}" data-remaining="{{ remainingBudget(goal, week, true) }}" href="" ng-repeat="goal in goals")
+        .budget ${{ remainingBudget(goal, week) }}
         .title {{goal.name}}
         .progress
 
@@ -19,8 +19,7 @@
         %input{ type: 'submit', 'ng-disabled' => 'messageForm.$invalid' }
 
       %ul
-        %li.ticket(class="{{ticket.name}}" ng-repeat="ticket in goal.tickets")
+        %li.ticket(class="{{ticket.name}}" ng-repeat="ticket in week | filter:{ goal_id: goal.$id }:true")
           .date {{ ticket.date | date: 'MMM dd' }}
-          .user {{ userNameFromId(ticket.user_id) }}
-          .amount ${{ ticket.amount }}
           .note {{ ticket.note }}
+          .amount ${{ ticket.amount }}

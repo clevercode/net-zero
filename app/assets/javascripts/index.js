@@ -1,23 +1,27 @@
 NetZero.controller('Index', ['$scope', 'angularFireCollection', function($scope, angularFireCollection) {
-  var timestamp = Date.parse(Date.create('beginning of week'));
+  var timestamp = Date.parse(Date.create('today').beginningOfWeek());
   $scope.goals  = angularFireCollection('https://netzero.firebaseio.com/goals');
   $scope.users  = angularFireCollection('https://netzero.firebaseio.com/users');
-  $scope.week   = new Firebase('https://netzero.firebaseio.com/weeks/' + timestamp);
-
+  $scope.week   = angularFireCollection('https://netzero.firebaseio.com/weeks/' + timestamp);
   $scope.ticket = { date: Date.create().format('{Mon} {ord}') };
+
+  window.weeks.initialize();
   window.goals.initialize();
   window.tickets.initialize();
 
-  $scope.remainingBudget = function(budget, tickets, percentage) {
+  $scope.remainingBudget = function(goal, tickets, percentage) {
+    var budget = goal.budget;
     var originalBudget = budget;
-    if (!!budget && !!tickets) {
+    if (!!goal && !!tickets) {
       budget = parseFloat(budget);
-      for (var id in tickets) {
-        budget -= parseFloat(tickets[id].amount);
+      for (var i = 0; i < tickets.length; i++) {
+        if (tickets[i].goal_id === goal.$id) {
+          budget -= parseFloat(tickets[i].amount);
+        }
       }
     }
 
-    if (!!percentage) { budget = (budget / originalBudget) * 100 }
+    if (!!percentage) budget = (budget / originalBudget) * 100;
     return budget;
   }
 
@@ -36,12 +40,6 @@ NetZero.controller('Index', ['$scope', 'angularFireCollection', function($scope,
     window.goals.update();
   });
 
-  // Runs on initial data load, and value change.
-  var noWeekExists = false;
-  $scope.week.on('value', function(snapshot) {
-    noWeekExists = snapshot.val() === null;
-  });
-
   // Runs everytime the $scope.users variable is updated.
   // Sets the user property of the ticket to the first user.
   var gotUser = false;
@@ -57,12 +55,12 @@ NetZero.controller('Index', ['$scope', 'angularFireCollection', function($scope,
     var newTicket = {
       amount:  parseFloat(ticket.amount),
       date:    Date.parse(Date.create(ticket.date)),
-      note:    ticket.note,
+      note:    ticket.note || '',
       goal_id: this.goal.$id,
       user_id: ticket.user.$id
     };
 
-    addticketToWeek(newTicket);
+    addTicketToWeek(newTicket);
 
     // Clears the form data.
     $scope.ticket = {
@@ -76,14 +74,10 @@ NetZero.controller('Index', ['$scope', 'angularFireCollection', function($scope,
     window.goals.update(true);
   };
 
-  var addticketToWeek = function(ticket) {
-    if (noWeekExists) {
-      var week = {};
-      week[timestamp] = { 0: ticket };
-      $scope.week.parent().set(week);
-    } else {
-      $scope.week.push(ticket);
-    }
+  var addTicketToWeek = function(ticket) {
+    var promise = window.weeks.getWeekRef(ticket.date)
+    promise.done(function(timestamp, weekRef, data) {
+      weekRef.push(ticket);
+    });
   }
-
 }]);

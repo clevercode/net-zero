@@ -68,6 +68,7 @@
     display: block
     padding: 0.9375em 0
     background: $yellow
+    border-bottom: 1px solid #aaa
     color: $dark-gray
     font-size: 1.6em
     font-weight: bold
@@ -82,23 +83,19 @@
 
   li
     padding: 1.5em
-    border-top: 1px solid #aaa
+    border-bottom: 1px solid #aaa
     list-style: none
     overflow: hidden
 
     div
       float: left
       width: 33.3%
+      min-height: 1em
       +ellipsize()
       color: $dark-gray
       font-size: 1.6em
 
       &.note
-        clear: left
-        width: 100%
-        padding-top: 1em
-
-      &.user
         text-align: center
 
       &.amount
