@@ -1,7 +1,9 @@
-NetZero.controller('Index', ['$scope', 'angularFireCollection', function($scope, angularFireCollection){
-  $scope.goals = angularFireCollection('https://netzero.firebaseio.com/goals');
-  $scope.users = angularFireCollection('https://netzero.firebaseio.com/users');
+NetZero.controller('Index', ['$scope', 'angularFireCollection', function($scope, angularFireCollection) {
+  $scope.goals  = angularFireCollection('https://netzero.firebaseio.com/goals');
+  $scope.users  = angularFireCollection('https://netzero.firebaseio.com/users');
   $scope.ticket = { date: Date.create().format('{Mon} {ord}') };
+  window.goals.initialize();
+  window.tickets.initialize();
 
   $scope.remainingBudget = function(budget, tickets, percentage) {
     var originalBudget = budget;
@@ -12,10 +14,7 @@ NetZero.controller('Index', ['$scope', 'angularFireCollection', function($scope,
       }
     }
 
-    if (!!percentage) {
-      budget = (budget / originalBudget) * 100
-    }
-
+    if (!!percentage) { budget = (budget / originalBudget) * 100 }
     return budget;
   }
 
@@ -30,20 +29,16 @@ NetZero.controller('Index', ['$scope', 'angularFireCollection', function($scope,
   }
 
   // Runs everytime the $scope.goals variable is updated.
-  // Sets a timeout before initializing the goals,
-  // in an attempt to only run it when they all exist.
-  var timeout;
   $scope.$watch('goals.length', function() {
-    clearTimeout(timeout);
-    timeout = setTimeout(function() {
-      window.goals.initialize();
-    }, 100);
+    window.goals.update();
   });
 
   // Runs everytime the $scope.users variable is updated.
   // Sets the user property of the ticket to the first user.
+  var gotUser = false;
   $scope.$watch('users.length', function() {
-    if ($scope.users.length) {
+    if (gotUser != true && $scope.users.length) {
+      gotUser = true;
       $scope.ticket.user = $scope.users[0];
     }
   });
@@ -52,10 +47,22 @@ NetZero.controller('Index', ['$scope', 'angularFireCollection', function($scope,
   $scope.saveTicket  = function(ticket) {
     var goalRef = this.goal.$ref;
     goalRef.child('tickets').push({
-      amount: parseFloat(ticket.amount),
-      date: Date.parse(Date.create(ticket.date)),
+      amount:  parseFloat(ticket.amount),
+      date:    Date.parse(Date.create(ticket.date)),
+      note:    ticket.note,
       user_id: ticket.user.$id
     });
+
+    // Clears the form data.
+    $scope.ticket = {
+      amount: '',
+      date:   Date.create().format('{Mon} {ord}'),
+      note:   '',
+      user:   $scope.users[0]
+    };
+
+    // Updates our goals on screen.
+    window.goals.update(true);
   };
 
 }]);

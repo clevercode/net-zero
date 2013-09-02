@@ -1,4 +1,45 @@
 form
+  top: 100%
+  left: 0
+  right: 0
+  z-index: 50
+  position: absolute
+  display: none
+  margin: 1.5em
+  padding: 1.5em
+  +box-shadow(black 0 0 1.5em)
+  +transition-duration(300ms, 200ms)
+  +transition-property(top, opacity)
+  +transition-timing-function(cubic-bezier(0, 1, 0.25, 1.03), ease-in)
+  background: white
+  opacity: 0
+
+  &.visible
+    top: 0
+    opacity: 1
+
+  h2
+    float: left
+    margin-bottom: 0.5em
+    color: #555
+    font-size: 2em
+    font-weight: bold
+    text-transform: capitalize
+
+  .close-form
+    float: right
+    display: block
+    width: 20px
+    height: 20px
+    background: image-url('close-button.png') no-repeat 0 0
+    background-size: 20px 42px
+    color: transparent
+    font-size: 0
+    text-indent: -100%
+
+    &:active
+      background-position: 0 -21px
+
   input, select
     width: 100%
     margin-bottom: 1em
@@ -14,6 +55,7 @@ form
       outline: none
 
     &[type=submit]
+      margin-bottom: 0
       -webkit-appearance: none
       background: $highlight
       color: $dark-gray

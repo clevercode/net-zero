@@ -6,16 +6,21 @@
         .title {{goal.name}}
         .progress
 
-  %table.goal-tickets(class="goal-{{goal.name}}" ng-repeat="goal in goals")
-    %tr.new-ticket
-      %td{ colspan: '3' }
-        %form{ name: 'ticketForm', 'ng-submit' => 'saveTicket(ticket)' }
-          %select{ name: 'user', 'ng-model' => 'ticket.user', 'ng-options' => 'user.name for user in users' }
-          %input{ type: 'text', name: 'date', 'ng-model' => 'ticket.date' }
-          %input{ type: 'number', name: 'amount', placeholder: '10.00', 'ng-model' => 'ticket.amount' }
-          %input{ type: 'submit', 'ng-disabled' => 'messageForm.$invalid' }
+  .tickets-container
+    .tickets(class="goal-{{goal.name}}" ng-repeat="goal in goals")
+      = link_to 'Add New Ticket', '#', class: 'new-ticket'
+      %form{ name: 'ticketForm', 'ng-submit' => 'saveTicket(ticket)' }
+        %h2 {{goal.name}} Ticket
+        = link_to 'close', '#', class: 'close-form'
+        %select{ name: 'user', 'ng-model' => 'ticket.user', 'ng-options' => 'user.name for user in users' }
+        %input{ type: 'text', name: 'date', 'ng-model' => 'ticket.date' }
+        %input{ type: 'number', name: 'amount', placeholder: '10.00', 'ng-model' => 'ticket.amount' }
+        %input{ type: 'text', name: 'note', placeholder: 'Burger Fi', 'ng-model' => 'ticket.note' }
+        %input{ type: 'submit', 'ng-disabled' => 'messageForm.$invalid' }
 
-    %tr.transaction(class="{{transaction.name}}" ng-repeat="transaction in goal.tickets")
-      %td.date {{transaction.date | date: 'MMM dd'}}
-      %td.user {{ userNameFromId(transaction.user_id) }}
-      %td.amount ${{transaction.amount}}
+      %ul
+        %li.ticket(class="{{ticket.name}}" ng-repeat="ticket in goal.tickets")
+          .date {{ ticket.date | date: 'MMM dd' }}
+          .user {{ userNameFromId(ticket.user_id) }}
+          .amount ${{ ticket.amount }}
+          .note {{ ticket.note }}
