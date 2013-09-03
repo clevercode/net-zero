@@ -4,7 +4,7 @@
       %a.goal(data-name="{{goal.name}}" data-remaining="{{ remainingBudget(goal, week, true) }}" href="" ng-repeat="goal in goals")
         .budget ${{ remainingBudget(goal, week) }}
         .title {{goal.name}}
-        .progress
+        .progress(style="height: {{ remainingBudget(goal, week, true) }}%")
 
   .tickets-container
     .tickets(class="goal-{{goal.name}}" ng-repeat="goal in goals")

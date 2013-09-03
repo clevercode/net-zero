@@ -25,7 +25,7 @@ window.goals =
   # @param [boolean] If set to true, go ahead and set the progress for each goal
   #   again, instead of only the new goals.
   # Sets a timeout in order to force this method run on the event cycle, after
-  #   Angular has finished rendering thins.
+  #   Angular has finished rendering things.
   update: (reset = no) ->
     setTimeout =>
       @view.find('.goal:eq(0)').click() unless reset
@@ -93,10 +93,9 @@ window.goals =
   # Sets the goal's background height.
   _setGoalProgress: ->
     for goal in @view.find '.goal:not(.progressified)'
-      $goal = $ goal
-      top = 100 - parseFloat $goal.data 'remaining'
+      $goal   = $ goal
+      percent = parseFloat $goal.data 'remaining'
       $goal.addClass 'progressified'
-      $goal.children('.budget').addClass('light') if top > 10
-      $goal.children('.title').addClass('light') if top > 90
-      $goal.addClass('warning') if top > 50
-      $goal.children('.progress').css top: "#{top}%"
+      $goal.children('.budget').addClass('light') if percent < 90
+      $goal.children('.title').addClass('light') if percent < 10
+      $goal.addClass('warning') if percent < 50

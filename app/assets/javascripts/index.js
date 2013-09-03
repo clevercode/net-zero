@@ -1,5 +1,5 @@
 NetZero.controller('Index', ['$scope', 'angularFireCollection', function($scope, angularFireCollection) {
-  var timestamp = Date.parse(Date.create('today').beginningOfWeek());
+  var timestamp = window.weeks.getBeginningOfWeek('today');
   $scope.goals  = angularFireCollection('https://netzero.firebaseio.com/goals');
   $scope.users  = angularFireCollection('https://netzero.firebaseio.com/users');
   $scope.week   = angularFireCollection('https://netzero.firebaseio.com/weeks/' + timestamp);
