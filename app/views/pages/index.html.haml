@@ -19,7 +19,7 @@
         %input{ type: 'submit', 'ng-disabled' => 'messageForm.$invalid' }
 
       %ul
-        %li.ticket(class="{{ticket.name}}" ng-repeat="ticket in week | filter:{ goal_id: goal.$id }:true")
+        %li.ticket(id="{{ticket.$id}}" class="{{completedClass(ticket)}}" ng-repeat="ticket in week | filter:{ goal_id: goal.$id }:true | orderBy:'-date'")
           .date {{ ticket.date | date: 'MMM dd' }}
           .note {{ ticket.note }}
           .amount ${{ ticket.amount }}

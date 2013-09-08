@@ -1,4 +1,6 @@
-#= require angular.min
+#= require angular
+#= require angular-route
+#= require angular-touch
 #= require angularfire.min
 
 #= require jquery

@@ -1,4 +1,4 @@
-NetZero.controller('Index', ['$scope', 'angularFireCollection', function($scope, angularFireCollection) {
+NetZero.controller('Index', ['$scope', '$swipe', 'angularFireCollection', function($scope, $swipe, angularFireCollection) {
   var timestamp = window.weeks.getBeginningOfWeek('today');
   $scope.goals  = angularFireCollection('https://netzero.firebaseio.com/goals');
   $scope.users  = angularFireCollection('https://netzero.firebaseio.com/users');
@@ -7,7 +7,23 @@ NetZero.controller('Index', ['$scope', 'angularFireCollection', function($scope,
 
   window.weeks.initialize();
   window.goals.initialize();
+
   window.tickets.initialize();
+  window.tickets.promise.progress(function(info) {
+    var tickets = $scope.week
+      , ticket  = undefined;
+
+    for (var i = 0; i < tickets.length; i++) {
+      if (tickets[i].$id === info.ticket) ticket = tickets[i];
+    }
+
+    if (info.remove === true) {
+      ticket.$ref.remove();
+      window.goals.update(true);
+    } else {
+      ticket.$ref.update({paid: info.paid});
+    }
+  });
 
   $scope.remainingBudget = function(goal, tickets, percentage) {
     var budget = goal.budget;
@@ -22,7 +38,11 @@ NetZero.controller('Index', ['$scope', 'angularFireCollection', function($scope,
     }
 
     if (!!percentage) budget = (budget / originalBudget) * 100;
-    return budget;
+    return Math.floor(budget);
+  }
+
+  $scope.completedClass = function(ticket) {
+    return ticket.paid === true ? 'completed' : '';
   }
 
   // Returns a user's name if we can find them, otherwise return the id.
@@ -36,8 +56,11 @@ NetZero.controller('Index', ['$scope', 'angularFireCollection', function($scope,
   }
 
   // Runs everytime the $scope.goals variable is updated.
+  // BAD hardcoded timeout. Will fix later.
   $scope.$watch('goals.length', function() {
-    window.goals.update();
+    setTimeout(function(){
+      window.goals.update();
+    }, 750);
   });
 
   // Runs everytime the $scope.users variable is updated.
@@ -54,6 +77,7 @@ NetZero.controller('Index', ['$scope', 'angularFireCollection', function($scope,
   $scope.saveTicket = function(ticket) {
     var newTicket = {
       amount:  parseFloat(ticket.amount),
+      paid:    false,
       date:    Date.parse(Date.create(ticket.date)),
       note:    ticket.note || '',
       goal_id: this.goal.$id,

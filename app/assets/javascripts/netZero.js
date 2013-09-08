@@ -2,7 +2,7 @@
 window.NZ = {};
 
 // Angular business.
-var NetZero = angular.module('NetZero', ['firebase']);
+var NetZero = angular.module('NetZero', ['ngRoute', 'ngTouch', 'firebase']);
 NetZero.masterUrl = 'https://netzero.firebaseio.com/';
 
 NetZero.run(['angularFireAuth', function(angularFireAuth){

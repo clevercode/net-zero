@@ -63,6 +63,7 @@
 
 .tickets
   width: 100%
+  overflow: hidden
 
   .new-ticket
     width: 100%
@@ -83,10 +84,25 @@
       text-shadow: 0 1px 0 black
 
   li
+    position: relative
     padding: 1.5em
+    +transition(left 10ms linear, right 10ms linear)
     border-bottom: 1px solid #ccc
     list-style: none
     overflow: hidden
+
+    &.completed
+      opacity: 0.5
+
+      &.completing
+        background: none
+        opacity: 1
+
+    &.completing
+      background: $green
+
+    &.deleting
+      background: $red
 
     div
       float: left
